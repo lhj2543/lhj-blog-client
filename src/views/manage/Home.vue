@@ -125,12 +125,18 @@
         autoSelectMenu(){//页面刷新时自动定位到菜单栏
             var routePath=this.$route.path;
             var routeName=this.$route.name;
+            alert(routePath);
+            var paths=routePath.split('/');
+            console.log(paths);
+            alert(paths.length);
             for(var i in this.menus){
                 var menu=this.menus[i];
-                if(routePath==menu.url){
+                if(paths.length<=3 && routePath==menu.url){
                     this.topMenuActiveName=menu.id;
                     this.leftMenus=menu.leftMenus;
                     break;
+                }else{
+                    
                 }
             }
         },
