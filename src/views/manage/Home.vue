@@ -46,7 +46,7 @@
             <div class="layout-nav">
                 <div class="top-menus" :style="{float:'right'}" >
                     <Menu mode="horizontal" theme="dark" @on-select="topSelectMenu" :active-name="topMenuActiveName">
-                        <MenuItem :to="menu.url" :name="menu.url" v-for="menu in menus" :key="menu.id" >
+                        <MenuItem :to="menu.url" :name="menu.id" v-for="menu in menus" :key="menu.id" >
                             <Icon :type="menu.icon" />
                             {{menu.name}}
                         </MenuItem>
@@ -66,7 +66,7 @@
               <!-- =====================导航栏结束===================== -->
 
               <Content :style="{minHeight: '280px',height:'100%', background: '#fff'}">
-                  <router-view/>
+                  <router-view :menuActiveName="menuActiveName" :openMenus="openMenus" :leftMenus="leftMenus"  />
               </Content>
           </Layout>
           <Footer class="layout-footer-center">Copyright &copy; 2020 vue-demo</Footer>
@@ -85,21 +85,11 @@
         openMenus:[],
         leftMenus:[],
         menus:{
-            top0:{id:'top0',name:'首页',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',leftMenus:[
-                 {id:'0',name:'welcome',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
-                 {id:'1',name:'iview-demo',url:'',urlName:'',icon:'ios-laptop',nextMenus:[
-                    {id:'1-1',name:'mnuesDemo1',url:'/mnuesDemo1',urlName:'mnuesDemo1',icon:''},
-                 ]},
-                 {id:'2',name:'item2',url:'',urlName:'',icon:'ios-mail-outline',nextMenus:[
-                    {id:'2-1',name:'op2',url:'/',urlName:'',icon:''},
-                    {id:'2-2',name:'op2',url:'/',urlName:'',icon:''},
-                 ]},
-                 {id:'3',name:'item3',url:'/afaf',urlName:'afaf',icon:'ios-photos-outline'},
-                 ],
-            },
-            top1:{id:'top1',name:'系统管理',url:'/content/systemManage',urlName:'content',icon:'ios-laptop',leftMenus:[
-                 {id:'top1-0',name:'菜单管理',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
-                 ]
+            top0:{id:'top0',name:'首页',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',leftMenus:[]},
+            top1:{id:'top1',name:'系统管理',url:'/content/systemManage',urlName:'content',icon:'ios-laptop',leftMenus:
+                    [
+                    {id:'top1-0',name:'菜单管理',url:'/content/systemManage/menusManage',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
+                    ]
             },
             top2:{id:'top2',name:'vue',url:'/content/vue',urlName:'content',icon:'ios-mail-outline',leftMenus:[]},
             top3:{id:'top3',name:'spring-boot',url:'/content/spring-boot',urlName:'content',icon:'ios-photos-outline',leftMenus:[]},
@@ -138,7 +128,7 @@
             for(var i in this.menus){
                 var menu=this.menus[i];
                 if(routePath==menu.url){
-                    this.topMenuActiveName=menu.url;
+                    this.topMenuActiveName=menu.id;
                     this.leftMenus=menu.leftMenus;
                     break;
                 }

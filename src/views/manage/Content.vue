@@ -42,20 +42,21 @@
 
 <script>
   export default {
-    name: 'Home',
+    name: 'myContent',
+    props:{
+        menuActiveName:String,
+        openMenus:Array,
+        leftMenus:Array,
+    },
     data () {
       return {
           
       }
-      
     },
     computed:{
     
     },
     created(){
-
-        alert(this.menus);
-
         //展开所以菜单节点
         //this.openMenus=this.getOpenMenus();
 

@@ -36,9 +36,9 @@ export default new Router({
           component: ()=>import('@/views/manage/Content.vue'),
           children:[
             {
-              path: '/mnuesDemo1',
-              name:'mnuesDemo1',
-              component: ()=>import('@/views/manage/MnuesDemo1.vue')
+              path: '/content/systemManage/menusManage',
+              name:'menusManage',
+              component: ()=>import('@/views/manage/systemManage/MenusManage.vue')
             }
           ]
         },
