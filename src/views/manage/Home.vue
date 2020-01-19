@@ -46,7 +46,7 @@
             <div class="layout-nav">
                 <div class="top-menus" :style="{float:'right'}" >
                     <Menu mode="horizontal" theme="dark" @on-select="topSelectMenu" :active-name="topMenuActiveName">
-                        <MenuItem :to="menu.url" :name="menu.id" v-for="menu in menus" :key="menu.id" >
+                        <MenuItem :to="menu.url" :name="menu.url" v-for="menu in menus" :key="menu.id" >
                             <Icon :type="menu.icon" />
                             {{menu.name}}
                         </MenuItem>
@@ -97,12 +97,12 @@
                  {id:'3',name:'item3',url:'/afaf',urlName:'afaf',icon:'ios-photos-outline'},
                  ],
             },
-            top1:{id:'top1',name:'系统管理',url:'/content',urlName:'content',icon:'ios-laptop',leftMenus:[
+            top1:{id:'top1',name:'系统管理',url:'/content/systemManage',urlName:'content',icon:'ios-laptop',leftMenus:[
                  {id:'top1-0',name:'菜单管理',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
                  ]
             },
-            top2:{id:'top2',name:'vue',icon:'ios-mail-outline',leftMenus:[]},
-            top3:{id:'top3',name:'spring boot',icon:'ios-photos-outline',leftMenus:[]},
+            top2:{id:'top2',name:'vue',url:'/content/vue',urlName:'content',icon:'ios-mail-outline',leftMenus:[]},
+            top3:{id:'top3',name:'spring-boot',url:'/content/spring-boot',urlName:'content',icon:'ios-photos-outline',leftMenus:[]},
         },
        
       }
@@ -119,7 +119,7 @@
         //this.setDefaultMenu();
 
         //页面刷新时自动定位到菜单栏
-        //this.autoSelectMenu();
+        this.autoSelectMenu();
 
     },
     methods:{
@@ -132,24 +132,17 @@
             });
             return result;
         },
-        autoSelectMenu(){////页面刷新时自动定位到菜单栏
+        autoSelectMenu(){//页面刷新时自动定位到菜单栏
             var routePath=this.$route.path;
             var routeName=this.$route.name;
-            this.leftMenus.some((menu) => {
-
-                if(menu.nextMenus!=undefined && menu.nextMenus!=null && menu.nextMenus.length>0){
-                    menu.nextMenus.some((nextMenu)=>{
-                        if(routeName==nextMenu.urlName){ 
-                            this.openMenus=[menu.id];
-                            this.menuActiveName=nextMenu.urlName;
-                            return true;
-                        }    
-                    });
-                }else if(routeName==menu.urlName){ 
-                    this.menuActiveName=menu.urlName;
-                    return true;
+            for(var i in this.menus){
+                var menu=this.menus[i];
+                if(routePath==menu.url){
+                    this.topMenuActiveName=menu.url;
+                    this.leftMenus=menu.leftMenus;
+                    break;
                 }
-            });
+            }
         },
         topSelectMenu(name){//顶部菜单选中事件
            this.leftMenus=this.menus[name].leftMenus==undefined || null?[]:this.menus[name].leftMenus;
