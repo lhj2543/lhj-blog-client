@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1348087",
+      "name": "海啸",
+      "font_class": "icon-test",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    }
+  ]
+}

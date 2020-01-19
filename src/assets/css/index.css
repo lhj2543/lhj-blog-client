@@ -1,0 +1,142 @@
+/* ===============================V0.1============================= */
+/*.carouse-item{
+    height: 390px;
+    background:#ccc;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  .carousel-title{
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    width: 1000px;
+    margin-left:-500px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .carousel-title .motto{
+    font-size: 33px;
+    color: #fff;
+  }
+  .carousel-title .source{
+    font-size: 20px;
+    margin-top:15px;
+    color: #fff;
+  }
+
+  .index-content{
+    background: rgb(238, 238, 238) ;
+    padding: 20px 0 35px 0;
+  }
+  .card-item{
+    width:300px;
+    
+    float: left;
+    margin: 15px 0 0 15px;
+    z-index: 99;
+  }
+  .card-item *{
+    text-align: center;
+  }
+  .card-item-img{
+    width:265px;
+    height:250px;
+  }*/
+  /* ===============================V0.1============================= */
+
+
+
+  /* ===============================V0.2============================= */
+  /* #app{
+    padding: 2rem;
+  } */
+  #index{
+    height: 100% !important;
+    background:#ffffff;
+    background:#E8D084;
+    background:#F7DBD2;
+    background:#DCE9F7;
+    background:#9EAFBF;
+    background:#79D6A2;
+    background:#E9C451;
+    background:#2B7FC1;
+    background:#E97A42;
+    background:#9BD3FF;
+    background:#D79F5C;
+    background:#A780D5;
+    background:#E6E6E6;
+    background:#DDAAAA;
+  }
+
+  .index-content{
+    width:113rem;
+    height:50rem;
+  }
+  .left-bg-img{
+    background:#ccc;
+    height:100%;width:75%;
+  }
+  .business-card{
+    background: #F4CD29;
+    width: 45%;
+    height: 60%;
+    position: absolute;
+    right: 0%;
+    top: 50%;
+    transform: translateX(0%)  translateY(-50%);
+    -webkit-transform: translate(0%,-50%);
+    -ms-transform: translate(0%,-50%);
+  }
+
+  .personal-plan{
+    height: 100% !important;
+  }
+  .personal-info{
+    height: 100%;
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    transform: translateX(0%)  translateY(-50%);
+    -webkit-transform: translate(0%,-50%);
+    -ms-transform: translate(0%,-50%);
+  }
+  .head-portrait{
+    height: 100%;
+    position: absolute;
+    right: 0%;
+    top: 50%;
+    transform: translateX(0%)  translateY(-50%);
+    -webkit-transform: translate(0%,-50%);
+    -ms-transform: translate(0%,-50%);
+  }
+  .head-portrait-avatar{
+    width:16rem !important;
+    height:16rem !important;
+  }
+  .personal-info-detial{
+    width: 88%;
+  }
+  .user-name{
+    /* font-size: 1.3rem; */
+    font-size: 2.5rem;
+  }
+  .welcome-speech{
+    font-size: 2.3rem;
+    /* font-weight:bold; */
+    /* color: #fff; */
+  }
+  .resume-deail{
+    width:10rem;
+    height: 3.6rem;
+    line-height: 3.6rem;
+    text-align: center;
+    background-color: #323231;
+    color: #F4CD29;
+    font-size: 1.3rem;
+    margin-top: 5.5rem;
+  }
+
+  /* ===============================V0.2============================= */
+
+  
