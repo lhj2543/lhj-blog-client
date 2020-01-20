@@ -1,10 +1,10 @@
 <template>
-    <div>菜单管理</div>
+    <div>路由</div>
 </template>
 
 <script>
 export default {
-    name:'MenusManage',
+    name:'MyRouter',
     data(){
         return{
 

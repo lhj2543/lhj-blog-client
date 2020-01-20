@@ -39,6 +39,16 @@ export default new Router({
               path: '/content/systemManage/menusManage',
               name:'menusManage',
               component: ()=>import('@/views/manage/systemManage/MenusManage.vue')
+            },
+            {
+              path: '/content/systemManage/userRoles',
+              name:'userRoles',
+              component: ()=>import('@/views/manage/systemManage/UserRoles.vue')
+            },
+            {
+              path: '/content/vue/myRouter',
+              name:'myRouter',
+              component: ()=>import('@/views/manage/vue/MyRouter.vue')
             }
           ]
         },

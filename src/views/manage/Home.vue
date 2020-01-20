@@ -46,7 +46,7 @@
             <div class="layout-nav">
                 <div class="top-menus" :style="{float:'right'}" >
                     <Menu mode="horizontal" theme="dark" @on-select="topSelectMenu" :active-name="topMenuActiveName">
-                        <MenuItem :to="menu.url" :name="menu.id" v-for="menu in menus" :key="menu.id" >
+                        <MenuItem :url="menu.url" :name="menu.id" :id="menu.id" v-for="menu in menus" :key="menu.id" >
                             <Icon :type="menu.icon" />
                             {{menu.name}}
                         </MenuItem>
@@ -88,10 +88,25 @@
             top0:{id:'top0',name:'首页',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',leftMenus:[]},
             top1:{id:'top1',name:'系统管理',url:'/content/systemManage',urlName:'content',icon:'ios-laptop',leftMenus:
                     [
+                    {id:'top1-20',name:'授权管理',url:'',urlName:'',icon:'ios-home-outline',nextMenus:[
+                        {id:'top1-20-0',name:'用户授权',url:'/content/systemManage/userRoles',urlName:'userROles',icon:'ios-home-outline',nextMenus:[]},
+                        {id:'top1-20-1',name:'菜单授权',url:'/content/systemManage/userRoles2',urlName:'userROles2',icon:'ios-home-outline',nextMenus:[]}
+                    ]},
                     {id:'top1-0',name:'菜单管理',url:'/content/systemManage/menusManage',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
+                    {id:'top1-1',name:'用户管理',url:'',urlName:'',icon:'ios-home-outline',nextMenus:[
+                        {id:'top1-1-0',name:'用户授权',url:'/content/systemManage/userRoles1',urlName:'userROles1',icon:'ios-home-outline',nextMenus:[]}
+                    ]},
+                    {id:'top1-2',name:'授权管理',url:'',urlName:'',icon:'ios-home-outline',nextMenus:[
+                        {id:'top1-2-0',name:'用户授权',url:'/content/systemManage/userRoles',urlName:'userROles',icon:'ios-home-outline',nextMenus:[]},
+                        {id:'top1-2-1',name:'菜单授权',url:'/content/systemManage/userRoles2',urlName:'userROles2',icon:'ios-home-outline',nextMenus:[]}
+                    ]},
                     ]
             },
-            top2:{id:'top2',name:'vue',url:'/content/vue',urlName:'content',icon:'ios-mail-outline',leftMenus:[]},
+            top2:{id:'top2',name:'vue',url:'/content/vue',urlName:'content',icon:'ios-mail-outline',leftMenus:
+                [
+                   {id:'top1-0',name:'路由',url:'/content/vue/myRouter',urlName:'myRouter',icon:'ios-home-outline',nextMenus:[]}, 
+                ]
+            },
             top3:{id:'top3',name:'spring-boot',url:'/content/spring-boot',urlName:'content',icon:'ios-photos-outline',leftMenus:[]},
         },
        
@@ -106,11 +121,10 @@
         //this.openMenus=this.getOpenMenus();
 
         //设置默认菜单
-        //this.setDefaultMenu();
+        this.setDefaultMenu();
 
         //页面刷新时自动定位到菜单栏
         this.autoSelectMenu();
-
     },
     methods:{
         getOpenMenus(){//展开所以菜单节点
@@ -125,23 +139,68 @@
         autoSelectMenu(){//页面刷新时自动定位到菜单栏
             var routePath=this.$route.path;
             var routeName=this.$route.name;
-            alert(routePath);
+            if(routePath.lastIndexOf('/')==routePath.length-1){
+                routePath=routePath.substring(0,routePath.lastIndexOf('/'));
+            }
             var paths=routePath.split('/');
-            console.log(paths);
-            alert(paths.length);
+            var flag=true;
+            topBreak:
             for(var i in this.menus){
                 var menu=this.menus[i];
-                if(paths.length<=3 && routePath==menu.url){
-                    this.topMenuActiveName=menu.id;
-                    this.leftMenus=menu.leftMenus;
-                    break;
+                if(paths.length<=3 ){
+                    if(routePath==menu.url){
+                        this.topMenuActiveName=menu.id;
+                        this.leftMenus=menu.leftMenus;
+                        this.setLeftDefaultMenu();
+                        flag=false;
+                        break;
+                    }
                 }else{
-                    
+                    var parentPath='/'+paths[1]+'/'+paths[2];
+                    var childrenPath=routePath;
+                    for(var j in menu.leftMenus){
+                        var leftMenu=menu.leftMenus[j];
+                        var nextMenus=leftMenu.nextMenus;
+                        if(nextMenus!=undefined && nextMenus!=null && nextMenus.length>0){
+                            for(var k in nextMenus){
+                                var nextMenu=nextMenus[k];
+                                 if(childrenPath==nextMenu.url){ 
+                                    this.topMenuActiveName=menu.id;
+                                    this.openMenus=[leftMenu.id];
+                                    this.menuActiveName=nextMenu.url;
+                                    this.leftMenus=menu.leftMenus;
+                                    flag=false;
+                                    break topBreak;
+                                }  
+                            }
+                        }else if(childrenPath==leftMenu.url){ 
+                            this.topMenuActiveName=menu.id;
+                            this.menuActiveName=leftMenu.url;
+                            this.openMenus=[];
+                            this.leftMenus=menu.leftMenus;
+                            flag=false;
+                            break topBreak;
+                        }
+                        
+                    }
                 }
             }
+            
+            if(flag){//页面没找到跳转到异常页面
+                this.$router.push({name:'error'});
+            }
+
         },
         topSelectMenu(name){//顶部菜单选中事件
-           this.leftMenus=this.menus[name].leftMenus==undefined || null?[]:this.menus[name].leftMenus;
+            var this_element=document.getElementById(name);
+            var this_url=this_element.getAttribute('url');
+            
+            if(this.$route.path.indexOf(this_url)==-1){
+                this.$router.push({path:this_url});
+                this.leftMenus=this.menus[name].leftMenus==undefined || null?[]:this.menus[name].leftMenus;
+                this.setLeftDefaultMenu();
+            }
+
         },
         setDefaultMenu(){//设置默认菜单
             for(var i in this.menus){
@@ -150,11 +209,31 @@
                 this.leftMenus=menu.leftMenus;
                 break;
             }
+        },
+        setLeftDefaultMenu(){//设置默认左菜单第一个
+            if(this.leftMenus!=undefined && this.leftMenus!=null && this.leftMenus.length>0){
+                var leftMenu=this.leftMenus[0];
+                var nextMenus=leftMenu.nextMenus;
+                if(nextMenus!=undefined && nextMenus!=null && nextMenus.length>0){
+                    var nextMenu=nextMenus[0];
+                    this.openMenus=[leftMenu.id];
+                    this.menuActiveName=nextMenu.url;
+                    this.$router.push({path:nextMenu.url});
+                }else{
+                    this.openMenus=[];
+                    this.menuActiveName=leftMenu.url;
+                    this.$router.push({path:leftMenu.url});
+                }
+            }
         }
     },
     mounted(){
        
-    }
-
+    },
+    watch: {//监听
+            '$route' (to, from) {//路径发生变化是监听
+               this.autoSelectMenu();
+            }
+        }
   }
 </script>

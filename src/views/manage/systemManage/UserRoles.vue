@@ -1,10 +1,10 @@
 <template>
-    <div>菜单管理</div>
+    <div>用户授权</div>
 </template>
 
 <script>
 export default {
-    name:'MenusManage',
+    name:'UserRoles',
     data(){
         return{
 
