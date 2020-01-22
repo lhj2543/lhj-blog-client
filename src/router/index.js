@@ -50,6 +50,12 @@ export default new Router({
               name:'myRouter',
               component: ()=>import('@/views/manage/vue/MyRouter.vue')
             }
+            ,
+            {
+              path: '/content/vue/other',
+              name:'other',
+              component: ()=>import('@/views/manage/systemManage/UserRoles.vue')
+            }
           ]
         },
         

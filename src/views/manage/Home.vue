@@ -65,8 +65,8 @@
               </Breadcrumb>
               <!-- =====================导航栏结束===================== -->
 
-              <Content :style="{minHeight: '280px',height:'100%', background: '#fff'}">
-                  <router-view :menuActiveName="menuActiveName" :openMenus="openMenus" :leftMenus="leftMenus"  />
+              <Content :style="{minHeight: '280px',height:'100%', background: '#fff'}" >
+                  <router-view :menuActiveName="menuActiveName" :openMenus="openMenus" :leftMenus="leftMenus" ref="ref_coontent"  />
               </Content>
           </Layout>
           <Footer class="layout-footer-center">Copyright &copy; 2020 vue-demo</Footer>
@@ -88,11 +88,11 @@
             top0:{id:'top0',name:'首页',url:'/welcome',urlName:'welcome',icon:'ios-home-outline',leftMenus:[]},
             top1:{id:'top1',name:'系统管理',url:'/content/systemManage',urlName:'content',icon:'ios-laptop',leftMenus:
                     [
-                    {id:'top1-20',name:'授权管理',url:'',urlName:'',icon:'ios-home-outline',nextMenus:[
-                        {id:'top1-20-0',name:'用户授权',url:'/content/systemManage/userRoles',urlName:'userROles',icon:'ios-home-outline',nextMenus:[]},
-                        {id:'top1-20-1',name:'菜单授权',url:'/content/systemManage/userRoles2',urlName:'userROles2',icon:'ios-home-outline',nextMenus:[]}
+                    {id:'top1-20',name:'菜单管理',url:'',urlName:'',icon:'ios-home-outline',nextMenus:[
+                        {id:'top1-20-0',name:'菜单管理',url:'/content/systemManage/menusManage',urlName:'menusManage',icon:'ios-home-outline',nextMenus:[]},
+                        {id:'top1-20-1',name:'菜单授权',url:'/content/systemManage/userRoles',urlName:'userRoles',icon:'ios-home-outline',nextMenus:[]}
                     ]},
-                    {id:'top1-0',name:'菜单管理',url:'/content/systemManage/menusManage',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
+                    {id:'top1-0',name:'菜单管理',url:'/content/systemManage/menusManage2',urlName:'welcome',icon:'ios-home-outline',nextMenus:[]},
                     {id:'top1-1',name:'用户管理',url:'',urlName:'',icon:'ios-home-outline',nextMenus:[
                         {id:'top1-1-0',name:'用户授权',url:'/content/systemManage/userRoles1',urlName:'userROles1',icon:'ios-home-outline',nextMenus:[]}
                     ]},
@@ -105,6 +105,7 @@
             top2:{id:'top2',name:'vue',url:'/content/vue',urlName:'content',icon:'ios-mail-outline',leftMenus:
                 [
                    {id:'top1-0',name:'路由',url:'/content/vue/myRouter',urlName:'myRouter',icon:'ios-home-outline',nextMenus:[]}, 
+                   {id:'top1-0',name:'其他',url:'/content/vue/other',urlName:'myRouter',icon:'ios-home-outline',nextMenus:[]}, 
                 ]
             },
             top3:{id:'top3',name:'spring-boot',url:'/content/spring-boot',urlName:'content',icon:'ios-photos-outline',leftMenus:[]},
@@ -211,6 +212,7 @@
             }
         },
         setLeftDefaultMenu(){//设置默认左菜单第一个
+            
             if(this.leftMenus!=undefined && this.leftMenus!=null && this.leftMenus.length>0){
                 var leftMenu=this.leftMenus[0];
                 var nextMenus=leftMenu.nextMenus;
@@ -224,6 +226,11 @@
                     this.menuActiveName=leftMenu.url;
                     this.$router.push({path:leftMenu.url});
                 }
+
+                this.$nextTick(() => {//手动更新菜单选择，展开
+                    this.$refs.ref_coontent.$refs.side_menu.updateOpened();
+                    this.$refs.ref_coontent.$refs.side_menu.updateActiveName();
+                })
             }
         }
     },
@@ -232,6 +239,7 @@
     },
     watch: {//监听
             '$route' (to, from) {//路径发生变化是监听
+                console.log(to);
                this.autoSelectMenu();
             }
         }

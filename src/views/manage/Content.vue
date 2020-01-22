@@ -1,5 +1,4 @@
 <style scoped>
-
 </style>
 
 <template>
@@ -7,7 +6,7 @@
       <Layout :style="{height:'100%'}">
         <!-- =====================左侧菜单开始===================== -->
         <Sider hide-trigger :style="{background: '#fff',height:'100%'}">
-            <Menu :active-name="menuActiveName" theme="light"  :open-names="openMenus" :style="{height:'100%'}"  width="auto" >
+            <Menu :active-name="menuActiveName" theme="light"  :open-names="openMenus" ref="side_menu" :style="{height:'100%'}"  width="auto" >
                 <template v-for="(menu,index) in leftMenus">
                 <Submenu v-if="menu.nextMenus && menu.nextMenus.length>0" :name="menu.id"  :key="index+'-'+menu.id">
                     <template slot="title">
@@ -30,8 +29,8 @@
         <!-- =====================左侧菜单结束===================== -->
 
         <!-- =====================右侧主体内容开始===================== -->
-        <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-        <router-view/>
+        <Content :style="{/*padding: '24px',*/ minHeight: '280px', background: '#fff'}">
+            <router-view/>
         </Content>
         <!-- =====================右侧主体内容结束===================== -->
         
@@ -50,14 +49,12 @@
     },
     data () {
       return {
-          
       }
     },
     computed:{
-    
     },
     created(){
-
+        
     },
     methods:{
         
