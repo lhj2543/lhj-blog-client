@@ -48,13 +48,13 @@ export default new Router({
             {
               path: '/content/vue/myRouter',
               name:'myRouter',
-              component: ()=>import('@/views/manage/vue/MyRouter.vue')
+              component: ()=>import('@/views/manage/vue/testRender.vue')
             }
             ,
             {
               path: '/content/vue/other',
               name:'other',
-              component: ()=>import('@/views/manage/systemManage/UserRoles.vue')
+              component: ()=>import('@/views/manage/vue/rederDemo.vue')
             }
           ]
         },

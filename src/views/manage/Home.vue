@@ -42,7 +42,9 @@
       <Layout :style="{height: '100%'}">
            <!-- =====================头部开始===================== -->
           <Header>
-              <!-- <div class="layout-logo">vue-demo</div> -->
+              <div class="layout-logo">
+                  <Icon type="logo-windows" color="#fff" /> 后台管理
+              </div>
             <div class="layout-nav">
                 <div class="top-menus" :style="{float:'right'}" >
                     <Menu mode="horizontal" theme="dark" @on-select="topSelectMenu" :active-name="topMenuActiveName">
@@ -104,8 +106,8 @@
             },
             top2:{id:'top2',name:'vue',url:'/content/vue',urlName:'content',icon:'ios-mail-outline',leftMenus:
                 [
-                   {id:'top1-0',name:'路由',url:'/content/vue/myRouter',urlName:'myRouter',icon:'ios-home-outline',nextMenus:[]}, 
-                   {id:'top1-0',name:'其他',url:'/content/vue/other',urlName:'myRouter',icon:'ios-home-outline',nextMenus:[]}, 
+                   {id:'top1-0',name:'render测试',url:'/content/vue/myRouter',urlName:'myRouter',icon:'ios-home-outline',nextMenus:[]}, 
+                   {id:'top1-0',name:'render demo',url:'/content/vue/other',urlName:'other',icon:'ios-home-outline',nextMenus:[]}, 
                 ]
             },
             top3:{id:'top3',name:'spring-boot',url:'/content/spring-boot',urlName:'content',icon:'ios-photos-outline',leftMenus:[]},

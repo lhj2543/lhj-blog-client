@@ -10,7 +10,7 @@
 
           <span class="mnue-more-r top-mnues">
 
-            <router-link target="_blank" :to="{name:'manage'}" :style="{color:'#000'}">后台管理</router-link>
+            <router-link target="_blank" :to="{path:'/welcome'}" :style="{color:'#000'}">后台管理</router-link>
             
           </span>
         </Col>
