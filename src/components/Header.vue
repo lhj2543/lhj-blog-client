@@ -1,12 +1,12 @@
 <template>
     <header id="index-header">
       <Row>
-        <Col span="8">
+        <Col span="4">
           <Icon title="liuhaijiang.top" id="logo" class="logo cursor-pointer"  color="" custom="iconfont icon-icon-logo" />
         </Col>
-        <Col span="16">
+        <Col span="20">
 
-          <span class="mnue-more-r cursor-pointer"><Icon title="菜单" class="mnue-more " type="md-list" color=""  /></span>
+          <span class="mnue-more-r cursor-pointer" @click="moreMnueOpen"><Icon title="菜单" class="mnue-more " type="md-list" color=""  /></span>
 
           <span class="mnue-more-r top-mnues">
 
@@ -31,6 +31,9 @@ export default {
   mounted () {//钩子
   },
   methods: {
+    moreMnueOpen(ev){
+      this.$emit('openMnue',ev);//调用父级openMnue
+    }
   },
   destroyed () {
   },

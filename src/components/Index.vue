@@ -1,35 +1,71 @@
 <template>
 
-  <div id="index">
+  <div id="index-body" class="index-body"  :class="{'mnue-more-open':mnueMoreOpenFlag}" >
 
-    <!-- 头部 -->
-    <!--或者这种写法也行<AppHeader/> -->
-    <app-header/>
-
-    <div class="index-content plan-centre">
-      <div class="left-bg-img" >
-        <!-- <img src="/static/index/1.jpg" width="100%" height="100%" /> -->
-        <img src="/static/index/graffiti-5.jpg" width="100%" height="100%" />
+    <div class="mnue-more-panel">
+      <div class="mnue-more-top">
+        <span><Icon class="" type="md-list" style="vertical-align:middle;" /> 菜单</span>
+        <Icon type="ios-close"  class="mnue-close cursor-pointer" @click="closeMnue" />
       </div>
 
-      <div class="business-card cursor-pointer">
-        <Row class="personal-plan">
-          <Col span="15" class="personal-info">
-            <div class="personal-info-detial plan-right-centre">
-              <div class="user-name"> 刘海江 </div>
-              <div class="welcome-speech">欢迎进入我的个人主页</div>
-              <div class="resume-deail">个人简历</div>
-            </div>
-          </Col>
-          <Col span="9" class="head-portrait" >
-            <Avatar class="head-portrait-avatar plan-left-centre" src="/static/index/header-2.jpg" />
-          </Col>
-        </Row>
-      </div>
+      <Row class="mnue-more-row">
+        <Col span="12" class="mnue-more-item" >
+          <div class="mnue-more-icon-div"><Icon type="ios-home-outline" class="mnue-more-icon" /></div>
+          <div class="mnue-more-title">首页</div>
+        </Col>
+        <Col span="12" class="mnue-more-item" style="border-right:none;" >
+          <div class="mnue-more-icon-div"><Icon type="ios-bulb-outline" class="mnue-more-icon" /></div>
+          <div class="mnue-more-title">个人简历</div>
+        </Col>
+      </Row>
+
+      <Row class="mnue-more-row">
+        <Col span="12" class="mnue-more-item" >
+          <div class="mnue-more-icon-div"><Icon type="ios-cafe-outline" class="mnue-more-icon" /></div>
+          <div class="mnue-more-title">作品展示</div>
+        </Col>
+        <Col span="12" class="mnue-more-item" style="border-right:none;" >
+          <div class="mnue-more-icon-div"> <Icon type="ios-mail-outline" class="mnue-more-icon" /></div>
+          <div class="mnue-more-title">联系我们</div>
+        </Col>
+      </Row>
+
     </div>
 
-    <!-- 尾部 -->
-    <app-footer/>
+    <!-- 遮罩层 -->
+    <div class="shade" :class="[mnueMoreOpenFlag?'display-block':'display-none']"  @click="closeMnue" ></div>
+
+    <div id="index" class="index" >
+      <!-- 头部 -->
+      <!--或者这种写法也行<AppHeader/> -->
+      <app-header v-on:openMnue="openMnue" />
+
+      <div class="index-content plan-centre">
+        <div class="left-bg-img" >
+          <!-- <img src="/static/index/1.jpg" width="100%" height="100%" /> -->
+          <img src="/static/index/graffiti-5.jpg" width="100%" height="100%" />
+        </div>
+
+        <div class="business-card cursor-pointer">
+          <Row class="personal-plan">
+            <Col span="15" class="personal-info">
+              <div class="personal-info-detial plan-right-centre">
+                <div class="user-name"> 刘海江 </div>
+                <div class="welcome-speech">欢迎进入我的个人主页</div>
+                <div class="resume-deail">个人简历</div>
+              </div>
+            </Col>
+            <Col span="9" class="head-portrait" >
+              <Avatar class="head-portrait-avatar plan-left-centre" src="/static/index/header-2.jpg" />
+            </Col>
+          </Row>
+        </div>
+      </div>
+
+      <!-- 尾部 -->
+      <app-footer/>
+    </div>
+
   </div>
 
 </template>
@@ -43,9 +79,9 @@ import AppFooter from './Footer.vue'//引入头部
 export default {
   name: 'Index',
   data () {
-            return {
-               
-            }
+          return {
+             mnueMoreOpenFlag:false 
+          }
         },
   components:{//注册组件
     AppHeader,
@@ -74,6 +110,16 @@ export default {
           var n = 22.5 * Math.min(e.scale, t.scale);
           /* var n = 32 * Math.min(e.scale, t.scale); */
           document.documentElement.style.fontSize = n + "px";
+    },
+    closeMnue(ev){
+      ev.stopPropagation();
+			ev.preventDefault();
+      this.mnueMoreOpenFlag = false;
+    },
+    openMnue(ev){
+      ev.stopPropagation();
+			ev.preventDefault();
+      this.mnueMoreOpenFlag = true;
     }
   },
   mounted(){

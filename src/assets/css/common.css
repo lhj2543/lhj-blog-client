@@ -35,6 +35,12 @@ body{
 .cursor-pointer{
     cursor:pointer;
 }
+.display-block{
+    display: block;
+}
+.display-none{
+    display: none;
+}
 
 .plan-centre{
     position: absolute;
