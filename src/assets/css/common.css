@@ -21,8 +21,27 @@ body{
     background:#E6E6E6;
     background:#DDAAAA; */
 }
-*{
+body *{
     color: #000;
+}
+
+.theme-0,.theme-0 *{
+    color: #000;
+    -webkit-transition: color 1s;
+    transition: color 1s;
+}
+
+.theme-1,.theme-1 *{
+    color: #fff;
+    -webkit-transition: color 1s;
+    transition: color 1s;
+}
+
+.hove-color:hover{
+    /* color:  #FF7C24 !important; */
+    color:  #1DB954 !important;
+    -webkit-transition: color 1s;
+    transition: color 0.5s;
 }
 
 .content-width{

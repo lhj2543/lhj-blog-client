@@ -1,5 +1,5 @@
 <template>
-    <footer id="index-footer">
+    <footer id="index-footer" :class="contentActiveTheme" >
       <div class="left-contact">
         <div class="contact-d">
           <Icon type="ios-chatbubbles" />
@@ -29,6 +29,9 @@ export default {
     return {
     }
   },
+  props:{
+      contentActiveTheme:String,
+  },
   mounted () {
   },
   methods: {
@@ -41,8 +44,7 @@ export default {
 
 
 <style scoped>
-  #index-footer{
-  }
+  
   .copyright{
     position: absolute;
     bottom: 0;

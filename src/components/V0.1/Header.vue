@@ -1,18 +1,18 @@
 <template>
     <header id="index-header">
       <Affix :offset-top="0" >
-        <div  class="row-header " :class="{ header_offset: header_offset_active }" >
-            <Row class="content-width">
-              <Col span="4" class="cursor-pointer">
-                <Avatar  size="45" icon="md-bonfire" class="logo"></Avatar>
-                <span class="logo-title ">Blog</span>
-              </Col>
-              <Col span="20" class="header-menu-itme">
-                <a v-for="headerMenu in headerMenus" :id="headerMenu.id" v-html="headerMenu.name"  :style="{cursor:headerMenu.cursor}" ></a>
-              </Col>
-            </Row>
-        </div>
-     </Affix>
+          <div  class="row-header " :class="{ header_offset: header_offset_active }" >
+              <Row class="content-width">
+                <Col span="4" class="cursor-pointer">
+                  <Avatar  size="45" icon="md-bonfire" class="logo"></Avatar>
+                  <span class="logo-title ">Blog</span>
+                </Col>
+                <Col span="20" class="header-menu-itme">
+                  <a v-for="headerMenu in headerMenus" :id="headerMenu.id" v-html="headerMenu.name"  :style="{cursor:headerMenu.cursor}" ></a>
+                </Col>
+              </Row>
+          </div>
+      </Affix>
     </header>
 </template>
 
